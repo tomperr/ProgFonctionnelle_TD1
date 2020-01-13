@@ -1,17 +1,10 @@
 Dans ce premier TD d’introduction, nous commençons par entrer quelques expressions _Scala_ simples pour nous familiariser avec le language. 
 
-Dans la deuxième partie, nous nous intéressons au calcul des termes d’une suite récurrente simple, la suite de Fibonacci. 
-
-La première méthode de calcul « naïve » ne permet pas d’obtenir les valeurs des termes de la suite, car le temps de calcul nécessaire est trop important.
-
-Nous implémenteron ensuite une méthode plus efficace. Enfin, dans la dernière partie, nous écrivons quelques fonctions pour calculer les termes de suites récurrentes de la forme:
-![equation](http://latex.codecogs.com/gif.latex?U_{n+1}=f(U_{n}))
-
+Dans un second temps , nous nous intéressons au calcul des termes de suites récurrentes simple, Syracuse et Fibonacci. 
 
 Liens utiles: 
 * Essayez Scala dans votre Browser
   * [scalafiddle.io](https://scalafiddle.io/sf/gKgxQY0/1)
-  * [scalakata.com](http://www.scalakata.com/)
   * [scastie.org](http://scastie.org/)
 * [First Steps to Scala (www.artima.com)](http://www.artima.com/scalazine/articles/steps.html)
 * [scala-lang.org](http://www.scala-lang.org)
@@ -194,6 +187,7 @@ Ce sont des suites récursives qui finissent toujours par arriver à 1, si l'ent
 Le problème de Syracuse est posé de la manière suivante:
 
 On considère la suite U définie par U(0) = N (un entier naturel positif) 
+
 ![Texte alternatif](CodeCogsEqn.gif)
 
 ## **Question 2**
@@ -210,19 +204,19 @@ Temps exponentiel:
 
 On souhaite pouvoir calculer à l’aide de _Scala_ n’importe quel terme de cette suite. _Scala_ permettant de définir simplement des fonctions de manière récursive, une idée naturelle est de s’inspirer directement de la définition de la suite.
 
-## **Question 2**
- En utilisant la définition récursive de la suite ![equation](http://latex.codecogs.com/gif.latex?U_{n}) donnée ci-dessus implémenter
- * Une fonction fib telle que fib(n) calcule ![equation](http://latex.codecogs.com/gif.latex?U_{n})         
+## **Question 3**
+ En utilisant la définition récursive de la suite ![equation](http://latex.codecogs.com/gif.latex?F_{n}) donnée ci-dessus implémenter
+ * Une fonction fib telle que fib(n) calcule ![equation](http://latex.codecogs.com/gif.latex?F_{n})         
  * Qui a pour signature `fibExp : (n :Int) Long`
 
-## **Question 3**
-  * Calculez les premiers entiers de Fibonacci, puis calculez ![equation](http://latex.codecogs.com/gif.latex?U_{40}). Comment expliquez-vous que le temps de calcul soit si long ?
+## **Question 4**
+  * Calculez les premiers entiers de Fibonacci, puis calculez ![equation](http://latex.codecogs.com/gif.latex?F_{40}). Comment expliquez-vous que le temps de calcul soit si long ?
 
 ## 2.2 Calcul en temps linéaire
 On peut effectuer un calcul plus efficace des termes de la suite en écrivant une fonction fibLin qui retourne une paire de deux termes consécutifs de la suite,
-c’est-à-dire telle que fib2 n donne la paire ![equation](http://latex.codecogs.com/gif.latex?(U_{n},U_{n+1})) chaque appel de la fonction fib2 ne nécessitera alors plus qu’un seul appel récursif.
+c’est-à-dire telle que fib2 n donne la paire ![equation](http://latex.codecogs.com/gif.latex?(F_{n},F_{n+1})) chaque appel de la fonction fib2 ne nécessitera alors plus qu’un seul appel récursif.
 
-## **Question 4**
+## **Question 5**
  * Implémenter une telle fonction fibLin.( [aide (link)](http://fr.wikipedia.org/wiki/Suite_de_Fibonacci) ) 
  * Qui a pour signature :  `fibLin : (n: Int, b: Long, a: Long) Long`
- * Combien d’additions effectue-t-on pour calculer ![equation](http://latex.codecogs.com/gif.latex?U_{n}) avec cette méthode ?
+ * Combien d’additions effectue-t-on pour calculer ![equation](http://latex.codecogs.com/gif.latex?F_{n}) avec cette méthode ?
