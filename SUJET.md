@@ -111,8 +111,22 @@ Pour calculer 2^10, il suffit alors d’entrer `puissance(2,10)`
  
 ## **Question 1.1**
  * Combien de multiplications effectue t-on pour calculer ![equation](http://latex.codecogs.com/gif.latex?X^{n}) en utilisant cette méthode ?
+ 	n-1 multiplications
  * Connaissez-vous une autre méthode de calcul plus efficace?
+ 	exponentiation rapide
  * Implémenter celle-ci ( [aide (link)](http://fr.wikipedia.org/wiki/Exponentiation_rapide) )
+>```
+>def puissance3(x:Int,n:Int):Int = 
+>	{
+>	   if (n==1) {
+>	     return x
+>	   } else if (n % 2 == 0) {
+>	     return puissance3(x*x, n/2)
+>	   } else {
+>	     return x*puissance3(x*x, (n-1)/2)
+>	   }
+>	}
+>```
 
 ## Fonction anonyme
 Avantage : notation plus courte, idéal pour les fonctions à usage unique
@@ -179,6 +193,18 @@ Observez comme les programmes show et showSquares sont similaires : leur seule d
 >show(x => x, List(1, 2, 3))
 >show(x => x * x, List(1, 2, 3))
 >```
+
+>```
+>def show(f: Int => Int, xs: List[Int]): Unit = {
+>	for (x <- xs) {
+>   	println(f(x))
+>  	}
+>}
+>
+>val arr : List[Int] = List(3,4,5)
+>
+>show((v) => v+1, arr)
+>```
 # 2 Suite de Syracuse
 
 Ce sont des suites récursives qui finissent toujours par arriver à 1, si l'entier de départ (le premier terme de la suite) ne dépasse pas 2^62. 
@@ -191,7 +217,16 @@ On considère la suite U définie par U(0) = N (un entier naturel positif)
 ![Texte alternatif](CodeCogsEqn.gif)
 
 ## **Question 2**
-Implémenté une fonction qui prend U(0) en paramètre et il retournera  le premier rang "n" tel que U(n) = 1 
+Implémenté une fonction qui prend U(0) en paramètre et il retournera  le premier rang "n" tel que U(n) = 1
+>```
+>def syracuse(x: Int): Int = {
+>	x match {
+>  		case 1 => return 1
+>   	case _ if x % 2 == 0 => return 1 + syracuse(x/2)
+>    	case _ => return 1 + syracuse(3*x + 1)
+>  	}
+>}
+>```
 
 # 3 La suite de Fibonacci
 La suite de Fibonacci est une suite d’entiers ![equation](http://latex.codecogs.com/gif.latex?U_{n}) définie récursivement par les relations :
@@ -209,8 +244,19 @@ On souhaite pouvoir calculer à l’aide de _Scala_ n’importe quel terme de ce
  * Une fonction fib telle que fib(n) calcule ![equation](http://latex.codecogs.com/gif.latex?F_{n})         
  * Qui a pour signature `fibExp : (n :Int) Long`
 
+>```
+>def fibExp (n :Int) : Long = {
+>  n match {
+>    case 0 => return 0
+>    case 1 => return 1
+>    case _ => return fibExp(n-1) + fibExp(n-2)
+>  }
+>}
+>```
+
 ## **Question 4**
   * Calculez les premiers entiers de Fibonacci, puis calculez ![equation](http://latex.codecogs.com/gif.latex?F_{40}). Comment expliquez-vous que le temps de calcul soit si long ?
+  C'est une fonction récursive, qui a donc un temps d'exécution exponentiel en fonction de n. Par appel, on fait deux appels récursifs.
 
 ## 2.2 Calcul en temps linéaire
 On peut effectuer un calcul plus efficace des termes de la suite en écrivant une fonction fibLin qui retourne une paire de deux termes consécutifs de la suite,
@@ -220,3 +266,12 @@ c’est-à-dire telle que fib2 n donne la paire ![equation](http://latex.codecog
  * Implémenter une telle fonction fibLin.( [aide (link)](http://fr.wikipedia.org/wiki/Suite_de_Fibonacci) ) 
  * Qui a pour signature :  `fibLin : (n: Int, b: Long, a: Long) Long`
  * Combien d’additions effectue-t-on pour calculer ![equation](http://latex.codecogs.com/gif.latex?F_{n}) avec cette méthode ?
+>```
+>def fibLin(n: Int, a: Long, b: Long) : Long = {
+>  n match {
+>    case 0 => a
+>    case 1 => b
+>    case _ => fibLin(n-1, b, a+b)
+>  }
+>}
+>```
